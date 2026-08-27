@@ -17,6 +17,9 @@
 
 ## PCB Prototype 2
 
+
+| Top-Down PCB Layout | 3D Board Preview | Schematic View
+| :---: | :---: | :---: |
 | ![PCB Top View](docs/PCBPrototype2.png) | ![3D Isometric](docs/TopViewPrototype2.png) | ![Schematic](docs/SchematicPrototype2.png)
 
 ## What changed from Prototype 1
