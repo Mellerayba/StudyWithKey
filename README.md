@@ -16,6 +16,6 @@ design in progress. Firmware for Prototype 2 not yet started.
 - [ ] Prototype 3 — ULP RISC-V coprocessor deep-sleep refactor
 
 ## Prototypes
-- [Prototype 1: Breadboard](./prototype-1-breadboard/) — early proof that BLE HID pairing and keypresses work end to end
+- [Prototype 1: Breadboard](./Physical-Prototypes/README.md) — early proof that BLE HID pairing and keypresses work end to end
 - [Prototype 2: Custom PCB](./prototype-2-custom-pcb/) — purpose-built board with USB-C, LiPo charging, and a real power path
 
