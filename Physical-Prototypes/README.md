@@ -1,5 +1,5 @@
 # Physical Prototype 1 — Breadboard Proof of Concept
-![Breadboard](./Physical-Prototypes/Breadboard.jpeg)
+![Breadboard](./Breadboard.jpeg)
 ## What this was
 An ESP32 dev board on a breadboard, running modified example BLE HID
 keyboard firmware, wired to a handful of push buttons.
