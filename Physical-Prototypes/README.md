@@ -1,6 +1,6 @@
 # Enclosure 
 
-##Case Prototype 1
+## Case Prototype 1
 
 Parametric, code-generated case for the Prototype 2 PCB — two-part
 snap-fit shell, generated with [CadQuery](https://cadquery.readthedocs.io/)
