@@ -21,6 +21,7 @@
 #define KEY_LEFT_GPIO   GPIO_NUM_1    // SW3
 #define KEY_SPACE_GPIO  GPIO_NUM_40   // SW4
 #define KEY_RIGHT_GPIO  GPIO_NUM_38   // SW5
+#define KEY_RECONNECT_GPIO GPIO_NUM_0 // SW1
 
 static const char *TAG = "swk";
 
@@ -78,6 +79,20 @@ static void hidd_event_callback(esp_hidd_cb_event_t event, esp_hidd_cb_param_t *
         default:
             break;
     }
+}
+
+static void clear_all_bonds(void)
+{
+    int dev_num = esp_ble_get_bond_device_num();
+    if (dev_num == 0) return;
+
+    esp_ble_bond_dev_t *dev_list = malloc(sizeof(esp_ble_bond_dev_t) * dev_num);
+    esp_ble_get_bond_device_list(&dev_num, dev_list);
+    for (int i = 0; i < dev_num; i++) {
+        esp_ble_remove_bond_device(dev_list[i].bd_addr);
+    }
+    free(dev_list);
+    ESP_LOGI(TAG, "Cleared %d bonded device(s)", dev_num);
 }
 
 static void gap_event_handler(esp_gap_ble_cb_event_t event, esp_ble_gap_cb_param_t *param)
@@ -139,7 +154,7 @@ void app_main(void)
     esp_ble_gap_set_security_param(ESP_BLE_SM_SET_INIT_KEY, &init_key, sizeof(uint8_t));
     esp_ble_gap_set_security_param(ESP_BLE_SM_SET_RSP_KEY, &rsp_key, sizeof(uint8_t));
     gpio_config_t io_conf = {
-        .pin_bit_mask = (1ULL << KEY_LEFT_GPIO) | (1ULL << KEY_RIGHT_GPIO) | (1ULL << KEY_SPACE_GPIO) | (1ULL << KEY_H_GPIO),
+        .pin_bit_mask = (1ULL << KEY_LEFT_GPIO) | (1ULL << KEY_RIGHT_GPIO) | (1ULL << KEY_SPACE_GPIO) | (1ULL << KEY_H_GPIO) | (1ULL << KEY_RECONNECT_GPIO),
         .mode = GPIO_MODE_INPUT,
         .pull_up_en = GPIO_PULLUP_ENABLE,
         .pull_down_en = GPIO_PULLDOWN_DISABLE,
@@ -149,6 +164,10 @@ void app_main(void)
 
 
     int64_t timeoutLast = 0;
+    
+    int64_t reconnectLast = 0;
+
+    bool reconnectCheck = false;
 
     int leftOutput = 1;
     int64_t leftLast = 0;
@@ -164,14 +183,33 @@ void app_main(void)
     ESP_LOGI(TAG, "Stage 3: watching all, with debouncing");
 
     while (1) {
-        //Left key check
-        vTaskDelay(pdMS_TO_TICKS(10));
+        //Reconnect key check
+        int reconnectLevel =  gpio_get_level(KEY_RECONNECT_GPIO);
+        if(reconnectCheck){
+            if(reconnectLevel == 0){
+                if(esp_timer_get_time() > reconnectLast + 3000000){
+                    clear_all_bonds();
+                    reconnectCheck = false;
+                }
+            }
+            else{
+                reconnectCheck = false;
+            }
+        }
+        if (reconnectLevel == 0 && reconnectCheck == false){
+                reconnectCheck = true;
+                reconnectLast = esp_timer_get_time();
+            }
+        
+
+        vTaskDelay(pdMS_TO_TICKS(10)); //Prevent running at clock speed 
         if(esp_timer_get_time() > timeoutLast + 60000000){
             rtc_gpio_pullup_en(GPIO_NUM_1);
             rtc_gpio_pulldown_dis(GPIO_NUM_1);
             esp_sleep_enable_ext0_wakeup(GPIO_NUM_1, 0);
             esp_deep_sleep_start();
         }
+        //Left key check
         int Leftlevel = gpio_get_level(KEY_LEFT_GPIO);
         if (!(Leftlevel == leftOutput || esp_timer_get_time()-leftLast < 30000)) {
             leftOutput = Leftlevel;
