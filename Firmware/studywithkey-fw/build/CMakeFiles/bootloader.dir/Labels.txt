@@ -1,0 +1,13 @@
+# Target labels
+ bootloader
+# Source files and their labels
+/Users/darragh/Documents/StudyWithKeyFolder/StudyWithKey/Firmware/studywithkey-fw/build/CMakeFiles/bootloader
+/Users/darragh/Documents/StudyWithKeyFolder/StudyWithKey/Firmware/studywithkey-fw/build/CMakeFiles/bootloader.rule
+/Users/darragh/Documents/StudyWithKeyFolder/StudyWithKey/Firmware/studywithkey-fw/build/CMakeFiles/bootloader-complete.rule
+/Users/darragh/Documents/StudyWithKeyFolder/StudyWithKey/Firmware/studywithkey-fw/build/bootloader-prefix/src/bootloader-stamp/bootloader-build.rule
+/Users/darragh/Documents/StudyWithKeyFolder/StudyWithKey/Firmware/studywithkey-fw/build/bootloader-prefix/src/bootloader-stamp/bootloader-configure.rule
+/Users/darragh/Documents/StudyWithKeyFolder/StudyWithKey/Firmware/studywithkey-fw/build/bootloader-prefix/src/bootloader-stamp/bootloader-download.rule
+/Users/darragh/Documents/StudyWithKeyFolder/StudyWithKey/Firmware/studywithkey-fw/build/bootloader-prefix/src/bootloader-stamp/bootloader-install.rule
+/Users/darragh/Documents/StudyWithKeyFolder/StudyWithKey/Firmware/studywithkey-fw/build/bootloader-prefix/src/bootloader-stamp/bootloader-mkdir.rule
+/Users/darragh/Documents/StudyWithKeyFolder/StudyWithKey/Firmware/studywithkey-fw/build/bootloader-prefix/src/bootloader-stamp/bootloader-patch.rule
+/Users/darragh/Documents/StudyWithKeyFolder/StudyWithKey/Firmware/studywithkey-fw/build/bootloader-prefix/src/bootloader-stamp/bootloader-update.rule
