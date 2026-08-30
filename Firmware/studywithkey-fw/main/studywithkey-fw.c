@@ -14,6 +14,8 @@
 #include "esp_hidd_prf_api.h"
 #include "hid_dev.h"
 #include "nvs_flash.h"
+#include "esp_sleep.h"
+#include "driver/rtc_io.h"
 
 #define KEY_H_GPIO      GPIO_NUM_42   // SW2
 #define KEY_LEFT_GPIO   GPIO_NUM_1    // SW3
@@ -103,6 +105,7 @@ static void gap_event_handler(esp_gap_ble_cb_event_t event, esp_ble_gap_cb_param
 
 void app_main(void)
 {
+    esp_sleep_wakeup_cause_t cause = esp_sleep_get_wakeup_cause();
     esp_err_t ret = nvs_flash_init();
     if (ret == ESP_ERR_NVS_NO_FREE_PAGES || ret == ESP_ERR_NVS_NEW_VERSION_FOUND) {
         ESP_ERROR_CHECK(nvs_flash_erase());
@@ -145,7 +148,7 @@ void app_main(void)
     gpio_config(&io_conf);
 
 
-
+    int64_t timeoutLast = 0;
 
     int leftOutput = 1;
     int64_t leftLast = 0;
@@ -163,6 +166,12 @@ void app_main(void)
     while (1) {
         //Left key check
         vTaskDelay(pdMS_TO_TICKS(10));
+        if(esp_timer_get_time() > timeoutLast + 60000000){
+            rtc_gpio_pullup_en(GPIO_NUM_1);
+            rtc_gpio_pulldown_dis(GPIO_NUM_1);
+            esp_sleep_enable_ext0_wakeup(GPIO_NUM_1, 0);
+            esp_deep_sleep_start();
+        }
         int Leftlevel = gpio_get_level(KEY_LEFT_GPIO);
         if (!(Leftlevel == leftOutput || esp_timer_get_time()-leftLast < 30000)) {
             leftOutput = Leftlevel;
@@ -175,7 +184,8 @@ void app_main(void)
                 esp_hidd_send_keyboard_value(hid_conn_id, 0, NULL, 0); // Release key
                 }
             }
-        leftLast = esp_timer_get_time();
+            timeoutLast = esp_timer_get_time();
+            leftLast = esp_timer_get_time();
         }
 
 
@@ -193,6 +203,7 @@ void app_main(void)
                 }
             }
             rightLast = esp_timer_get_time();
+            timeoutLast = esp_timer_get_time();
         }
 
 
@@ -211,6 +222,7 @@ void app_main(void)
                 }
             }
             spaceLast = esp_timer_get_time();
+            timeoutLast = esp_timer_get_time();
         }
 
         //H key check
@@ -227,6 +239,7 @@ void app_main(void)
                 }
             }
             hLast = esp_timer_get_time();
+            timeoutLast = esp_timer_get_time();
         }
 
     }
