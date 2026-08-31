@@ -1,0 +1,11 @@
+Attempted with Fluke 175 — suspected blown 400mA fuse (borrowed/inherited meter, unknown history). Need to either replace fuse, verify with a different meter, or measure via a series sense resistor (~10Ω) using voltage mode instead of current mode.`
+
+
+
+
+1st measure - Voltage of a 10 Ohm resistor in series with the board. V measured at 500mV +- 50mV giving a current draw of ~50mA in active mode
+
+Waiting on a replacement fuse for multimeter to measure power draw in sleep mode. Could not get a reliable reading for sleep mode with a 10 Ohm resistor, 100 Ohm resistor
+was too large to give the board enough power. Will repeat by measuring current in series when fuse is replaced.
+
+
