@@ -9,3 +9,6 @@ Waiting on a replacement fuse for multimeter to measure power draw in sleep mode
 was too large to give the board enough power. Will repeat by measuring current in series when fuse is replaced.
 
 
+Battery capacity is 500mAh hence Battery life = Capacity / Current draw = 500mAh / 50mA = 10 hours of projected battery life in full use mode. 
+
+
