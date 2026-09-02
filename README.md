@@ -5,8 +5,8 @@ built from a breadboard proof-of-concept through to a battery-powered
 custom PCB.
 
 ## Status
- In progress — Prototype 2 hardware ordered and shipped. Enclosure
-design in progress. Firmware for Prototype 2 not yet started.
+Currently halted - critical flaw in the ordered PCBs and I am not in a financial position currently to reorder them.
+Firmware is completely functional and available to use freely
 
 ## Roadmap
 - [x] Prototype 1 — breadboard BLE HID proof of concept
