@@ -23,4 +23,4 @@ after such a set back; however, the firmware is completely functional and availa
 ## Prototypes
 - [Prototype 1: Breadboard](./Physical-Prototypes/README.md) — early proof that BLE HID pairing and keypresses work end to end
 - [Prototype 2: Custom PCB](./prototype-2-custom-pcb/) — purpose-built board with USB-C, LiPo charging, and a real power path
-- [Physical PCB: Resoldered demo](././Physical-Prototypes/PhysicalProduct) — Demo photos and videos of the real custom PCB, showing that the firmware works
+- [Physical PCB: Resoldered demo](././Physical-Prototypes/PhysicalProduct.md) — Demo photos and videos of the real custom PCB, showing that the firmware works
