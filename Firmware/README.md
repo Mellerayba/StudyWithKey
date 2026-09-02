@@ -106,14 +106,7 @@ enough, to be worth recording rather than just fixing quietly:
 
 ## Open items
 
-- **Power measurement not yet done.** Deep sleep behaves correctly
-  functionally (confirmed wake-on-press, confirmed BLE re-pairs), but
-  actual current draw hasn't been measured yet — on the list before
-  trusting any real battery-life claims.
-- **Not yet running on the actual custom PCB** — everything above was
-  built and tested on a generic ESP32-S3 devkit (same chip, different
-  board). Migrating to the real board is still pending.
-- **ULP-RISC-V (in progress).** The plan is not to replace the
+- **ULP-RISC-V (cancelled).** The plan is not to replace the
   working `ext0` hardware wake outright, but to evaluate whether a
   ULP-RISC-V debounce stage — confirming a press is sustained before
   waking the main CPU — is worth its own small power cost by preventing
