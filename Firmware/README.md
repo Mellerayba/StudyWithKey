@@ -6,10 +6,11 @@ was proven working in isolation before being combined with the next.
 
 ## Status
 
-Core functionality complete and working on hardware (demo board, same
-chip as the custom PCB). Not yet moved onto the assembled custom board.
-ULP-RISC-V power optimization in progress as an additive v2 on top of a
-working v1.
+Core functionality complete and working on hardware.
+After power measurements, I found a negligible difference between the built in
+C deep sleep module, versus a RISCV deep sleep example code. Therefore, I decided
+that it was best to reduce complexity, and not move forward with the RISCV deep 
+sleep idea.
 
 ## What it does
 
